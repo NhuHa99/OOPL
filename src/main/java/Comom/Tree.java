@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avl;
+package Comom;
 
 /**
  *
@@ -22,16 +22,22 @@ public class Tree {
 	private int visited; // xac dinh node da duyet -1 0 1
         private float move_x; // so pixel di chuyen theo truc X
         private float move_y;  // so pixel di chuyen theo truc y
-
+        private int color; // Rb_Tree
+        
+        
 	public Tree() {
 		//value = 0;
 		height = 1;
 		parent = null;
 		leftChild = null;
 		rightChild = null;
-                visited = -1;
 	}
-        
+        public void setColor(int color){
+            this.color = color;
+        }
+        public int getColor(){
+            return this.color;
+        }
         public void setMove_x(float move_x){
             this.move_x = move_x;
         }
@@ -48,9 +54,15 @@ public class Tree {
             return this.move_y;
         }
         
+        
 	public Tree(int value) {
 		this();
 		this.value = value;
+	}
+        public Tree(int value, int color) {
+		this();
+		this.value = value;
+                this.color = color;
 	}
 
         public int getVisited(){

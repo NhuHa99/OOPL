@@ -5,6 +5,9 @@
  */
 package avl;
 
+import Comom.Param;
+import Comom.Tree;
+
 /**
  *
  * @author ddung
@@ -238,7 +241,6 @@ public class UIAvl extends javax.swing.JFrame {
                 if(localTree!=null){
                     Tree degTree = AvlTree.chekDeg(localTree);
                     setXY(localTree);
-                    System.out.println(localTree.getX()+ "mmm" + localTree.getY());
                     treePanel.startAction();
                     if (degTree != null){
 			AvlTreeLogic.setDegenerated(degTree.getValue());

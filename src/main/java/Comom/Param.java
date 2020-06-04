@@ -1,4 +1,4 @@
-package avl;
+package Comom;
 
 import java.awt.Color;
 
@@ -22,6 +22,9 @@ public class Param {
 	public static Color COLOR_REMOVED = new Color(239,219,0);
 	public static Color COLOR_LINE = new Color(0,0,0);
 	public static Color COLOR_VALUE = Color.BLACK;
-        public static int SPEED_ANIMATION = 50;
+        public static int SPEED_ANIMATION = 100;
+        public static int RED = 1;
+        public static int BLACK = 0;
+        
 	
 }

@@ -1,4 +1,4 @@
-package avl;
+package RBTree;
 
 import Comom.Param;
 import Comom.Tree;
@@ -12,13 +12,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class TreePanel extends JPanel implements ActionListener{
+public class RBTreePanel extends JPanel implements ActionListener{
 	
 	private Graphics2D g2; 
         private int done = 0;
 	Timer tm = new Timer(10, this);
 	
-        public TreePanel(){
+        public RBTreePanel(){
             //tm.start();
 	}
         public void setMove(Tree localTree, float x2, float y2){
@@ -55,40 +55,33 @@ public class TreePanel extends JPanel implements ActionListener{
         }
         
         public void drawTree(Tree localTree) {
-		if (localTree == null) {
+            
+		if (localTree == null || localTree.getValue() == 0) {
 			return;
 		}else{
                     localTree.setX(localTree.getX()+localTree.getMove_x());
                     localTree.setY(localTree.getY()+localTree.getMove_y());
                 }
-                
 		Tree parent = localTree.getParent();
-		
                 if (parent != null) {
 			g2.setColor(Param.COLOR_LINE);
 			g2.drawLine((int)parent.getX()+Param.DIAMETR/2, (int)parent.getY()+Param.DIAMETR-1, (int)localTree.getX() + 17, (int)localTree.getY() + 17);
 		}
 		
 		g2.setColor(Param.COLOR_NODE);
-		if (localTree.getValue() == AvlTreeLogic.getAdded()) {
-			g2.setColor(Param.COLOR_ADDED);
-		} 
-		if (localTree.getValue() == AvlTreeLogic.getRemoved()) {
-			g2.setColor(Param.COLOR_REMOVED);
-		}
-		if (localTree.getValue() == AvlTreeLogic.getDegenerated()) {
-			g2.setColor(Param.COLOR_DEG);
-		}
-//                if(localTree.getVisited() == 0){
-//                    g2.setColor(Param.COLOR_NODE_VISITED);
-//                }
-		
+		if (localTree.getColor()== 0) {
+			g2.setColor(Color.BLACK);
+		} else {
+                    g2.setColor(Color.RED);
+                    
+                }
+                if(localTree.getValue() == RedBlackTree.getSearchKey()){
+                        g2.setColor(Color.yellow);
+                }
+	
 		g2.fillOval((int)localTree.getX(), (int)localTree.getY(), Param.DIAMETR, Param.DIAMETR);
 		
-		g2.setColor(Param.COLOR_VALUE);
-		if (localTree.getValue() == AvlTreeLogic.getAdded()) {
-			g2.setColor(Color.WHITE);
-		}
+		g2.setColor(Color.WHITE);
 		String nodeString = localTree.getValue() + "";
 		g2.drawString(nodeString, localTree.getX() + (Param.DIAMETR-6)/2, localTree.getY() + 22);
 		
@@ -101,12 +94,12 @@ public class TreePanel extends JPanel implements ActionListener{
 		super.paintComponent(g);  
 		g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		drawTree(AvlTreeLogic.getTree());
+		drawTree(RedBlackTree.getTree());
 	}  
 
         public void startAction(){
             this.done = 0;
-            setMoveAllNode(AvlTreeLogic.getTree());
+            setMoveAllNode(RedBlackTree.getTree());
             tm.start();
         } 
     @Override
